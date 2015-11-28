@@ -1,76 +1,55 @@
 package com.mgireesh;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Solution {
 
-	/// **
-	// * This is the interface that represents nested lists. You should not
-	/// implement
-	// * it, or speculate about its implementation.
-	// */
-	// public interface NestedInteger {
-	// /**
-	// * @return true if this NestedInteger holds a single integer, rather than
-	/// a
-	// * nested list
-	// */
-	// boolean isInteger();
-	//
-	// /**
-	// * @return the single integer that this NestedInteger holds, if it holds a
-	// * single integer Return null if this NestedInteger holds a nested
-	// * list
-	// */
-	// Integer getInteger();
-	//
-	// /**
-	// * @return the nested list that this NestedInteger holds, if it holds a
-	// * nested list Return null if this NestedInteger holds a single
-	// * integer
-	// */
-	// List<NestedInteger> getList();
-	// }
-	//
-	/// *-----Input----*/
-	// {{1,2},3,{4,{5,6}}}
-	//
-	/// *-----Solution----*/
-	// public int reverseDepthSum (List<NestedInteger> input)
-	// {
-	// int findMaxinList(List<NestedInteger>){
-	// int currMax = 0;
-	// for(int i = 0; i < list.length(); i++){
-	// currMax = Max(currMax, findDepth(list[i]));
-	// }
-	// return currMax;
-	// }
-	//
-	// int findDepth(NestedInteger input){
-	// int depth = 0;
-	//
-	// if(null == getInteger()){
-	// if(null == input.getInteger()){
-	// list = input.getList();
-	// return findMaxinList(list);
-	// }
-	// }else{
-	// if(input.isInteger()){
-	// return depth+1;
-	// }
-	// }
-	// }
-	//
-	// int getSum(NestedInteger list, int weight){
-	//
-	// }
-	//
-	// // implementation here
-	// int maxNested = findMaxInlist(input);
-	//
-	// }
-	//
-	// depth 1:3=3 at weight 3
-	// depth 2:1,2,4=7 at weight 2
-	// depth 3:5,6=11 at weight 1
-	// so 9+14+11=34
+	public int getFwdSum(ArrayList<NestedInteger> nestedList, int depth) {
+		int sum = 0;
+		for (int i = 0; i < nestedList.size(); i++) {
+			if (nestedList[i].isInteger()) {
+				sum += nestedList[i].getInteger();
+			} else {
+				sum += getFwdSum(nestedList[i].getList(), depth + 1);
+			}
+		}
+		return sum * depth;
+	}
 
+	public int forwardDepthSum(List<NestedInteger> input) {
+		return getFwdSum(input, 1);
+	}
+
+	private int maxDepth = 0;
+
+	public void getRevSum(List<NestedInteger> nestedList, HashMap<Integer, Integer> map, int depth) {
+		int sum = 0;
+		for (int i = 0; i < nestedList.size(); i++) {
+			if (nestedList[i].isInteger()) {
+				sum += nestedList[i].getInteger();
+				if (map.containsKey(depth)) {
+					sum += map.get(depth);
+				}
+				map.put(depth, sum);
+				maxDepth = Math.max(maxDepth, depth);
+			} else {
+				getRevSum(nestedList[i].getList(), depth + 1);
+			}
+		}
+	}
+
+	public int reversDepthSum(List<NestedInteger> input) {
+		int sum = 0;
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		getRevSum(input, map, 1);
+
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			sum += (maxDepth - entry.getKey()) * entry.getValue();
+		}
+
+		return sum;
+	}
 }

@@ -7,6 +7,8 @@ public class NestedIntegerImpl implements NestedInteger {
 	private Integer m_intVal;
 	private List<NestedInteger> m_list;
 
+	public Integer length;
+
 	public NestedIntegerImpl(Integer intVal) {
 		m_intVal = intVal;
 	}

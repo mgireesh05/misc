@@ -14,18 +14,18 @@ public class App {
 
 		inputList.add(new NestedIntegerImpl(list1));
 
-		// inputList.add(new NestedIntegerImpl(3));
-		//
-		// List<NestedInteger> list2 = new ArrayList<NestedInteger>();
-		// list2.add(new NestedIntegerImpl(4));
-		//
-		// List<NestedInteger> list3 = new ArrayList<NestedInteger>();
-		// list3.add(new NestedIntegerImpl(5));
-		// list3.add(new NestedIntegerImpl(6));
-		//
-		// list2.add(new NestedIntegerImpl(list3));
-		//
-		// inputList.add(new NestedIntegerImpl(list2));
+		inputList.add(new NestedIntegerImpl(3));
+
+		List<NestedInteger> list2 = new ArrayList<NestedInteger>();
+		list2.add(new NestedIntegerImpl(4));
+
+		List<NestedInteger> list3 = new ArrayList<NestedInteger>();
+		list3.add(new NestedIntegerImpl(5));
+		list3.add(new NestedIntegerImpl(6));
+
+		list2.add(new NestedIntegerImpl(list3));
+
+		inputList.add(new NestedIntegerImpl(list2));
 
 		System.out.println(inputList.toString());
 
