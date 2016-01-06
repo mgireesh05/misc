@@ -45,9 +45,10 @@ public class NestedIntegerImpl implements NestedInteger {
 		}
 
 		if (null != m_list) {
-			for (NestedInteger current : m_list) {
-				string.append(", " + current.toString());
+			for (int i = 0; i < m_list.size() - 1; i++) {
+				string.append(m_list.get(i).toString() + ", ");
 			}
+			string.append(m_list.get(m_list.size() - 1).toString());
 		}
 		string.append("}");
 		return string.toString();

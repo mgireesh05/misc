@@ -8,6 +8,7 @@ public class App {
 	public static void main(String[] args) {
 		List<NestedInteger> inputList = new ArrayList<NestedInteger>();
 		// {{1,2},3,{4,{5,6}}}
+
 		List<NestedInteger> list1 = new ArrayList<NestedInteger>();
 		list1.add(new NestedIntegerImpl(1));
 		list1.add(new NestedIntegerImpl(2));
@@ -28,6 +29,10 @@ public class App {
 		inputList.add(new NestedIntegerImpl(list2));
 
 		System.out.println(inputList.toString());
+
+		Solution sol = new Solution();
+		System.out.println(sol.forwardDepthSum(inputList));
+		System.out.println(sol.reverseDepthSum(inputList));
 
 	}
 
